@@ -2,5 +2,5 @@
     <string name="app_name">InstaGranny</string>
     <string name="title_accueil">Accueil</string>
     <string name="title_amis">Amis</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_profil">Profil</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.instagranny.ui.notifications
+package com.example.instagranny.ui.profil
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.instagranny.databinding.FragmentNotificationsBinding
+import com.example.instagranny.databinding.FragmentProfilBinding
 
-class NotificationsFragment : Fragment() {
+class ProfilFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentProfilBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val profilViewModel =
+            ViewModelProvider(this).get(ProfilViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentProfilBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textProfil
+        profilViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
