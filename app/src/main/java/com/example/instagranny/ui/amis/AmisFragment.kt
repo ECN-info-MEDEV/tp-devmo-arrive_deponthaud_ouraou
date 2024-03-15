@@ -1,4 +1,4 @@
-package com.example.instagranny.ui.home
+package com.example.instagranny.ui.amis
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.instagranny.databinding.FragmentHomeBinding
+import com.example.instagranny.databinding.FragmentAmisBinding
 
-class HomeFragment : Fragment() {
+class AmisFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentAmisBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val amisViewModel =
+            ViewModelProvider(this).get(AmisViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentAmisBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textAmis
+        amisViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
