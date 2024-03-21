@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.instagranny.databinding.FragmentProfilBinding
@@ -22,17 +23,12 @@ class ProfilFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profilViewModel =
-            ViewModelProvider(this).get(ProfilViewModel::class.java)
+        return ComposeView(requireContext()).apply {
+            setContent {
+                ProfilPage()
 
-        _binding = FragmentProfilBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textProfil
-        profilViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            }
         }
-        return root
     }
 
     override fun onDestroyView() {
