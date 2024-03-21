@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -66,14 +67,15 @@ fun ProfilPage(modifier : Modifier = Modifier) {
             text=stringResource(com.example.instagranny.R.string.photo_profil)
         )
         Spacer(
-            modifier=Modifier.height(20.dp)
+            modifier=Modifier.height(80.dp)
         )
         //ligne NOM
         Row(modifier=modifier)
         {Column() {
             Text(
                 text=stringResource(com.example.instagranny.R.string.nom),
-                textAlign = TextAlign.Start)
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.Bold)
         }
             Spacer(
                 modifier=Modifier.width(16.dp)
@@ -87,7 +89,8 @@ fun ProfilPage(modifier : Modifier = Modifier) {
         Row(modifier=modifier)
         {Column() {
             Text(
-                text=stringResource(com.example.instagranny.R.string.login),)
+                text=stringResource(com.example.instagranny.R.string.login),
+                fontWeight = FontWeight.Bold)
         }
             Spacer(
                 modifier=Modifier.width(16.dp)
@@ -101,7 +104,8 @@ fun ProfilPage(modifier : Modifier = Modifier) {
         Row(modifier=modifier)
         {Column() {
             Text(
-                text=stringResource(com.example.instagranny.R.string.mail),)
+                text=stringResource(com.example.instagranny.R.string.mail),
+                fontWeight = FontWeight.Bold)
         }
             Spacer(
                 modifier=Modifier.width(16.dp)
@@ -115,7 +119,8 @@ fun ProfilPage(modifier : Modifier = Modifier) {
         Row(modifier=modifier)
         {Column() {
             Text(
-                text=stringResource(com.example.instagranny.R.string.portable),)
+                text=stringResource(com.example.instagranny.R.string.portable),
+                fontWeight = FontWeight.Bold)
         }
             Spacer(
                 modifier=Modifier.width(16.dp)
@@ -129,7 +134,8 @@ fun ProfilPage(modifier : Modifier = Modifier) {
         Row(modifier=modifier)
         {Column() {
             Text(
-                text=stringResource(com.example.instagranny.R.string.bio),)
+                text=stringResource(com.example.instagranny.R.string.bio),
+                fontWeight = FontWeight.Bold)
         }
             Spacer(
                 modifier=Modifier.width(16.dp)
