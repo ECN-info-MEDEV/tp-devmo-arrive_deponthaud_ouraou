@@ -10,4 +10,8 @@ class AccueilViewModel : ViewModel() {
         value = "This is accueil Fragment"
     }
     val text: LiveData<String> = _text
+
+    Box{
+
+    }
 }
