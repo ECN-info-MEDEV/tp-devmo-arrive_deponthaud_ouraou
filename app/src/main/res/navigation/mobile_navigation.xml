@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/mobile_profil"
+            android:id="@+id/mobile_home"
             app:startDestination="@+id/navigation_accueil">
 
     <fragment
@@ -18,7 +18,7 @@
             tools:layout="@layout/fragment_amis"/>
 
     <fragment
-            android:id="@+id/navigation_notifications"
+            android:id="@+id/navigation_profil"
             android:name="com.example.instagranny.ui.profil.ProfilFragment"
             android:label="@string/title_profil"
             tools:layout="@layout/fragment_profil"/>
