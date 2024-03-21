@@ -18,7 +18,7 @@
             tools:layout="@layout/fragment_amis"/>
 
     <fragment
-            android:id="@+id/navigation_notifications"
+            android:id="@+id/navigation_profil"
             android:name="com.example.instagranny.ui.profil.ProfilFragment"
             android:label="@string/title_profil"
             tools:layout="@layout/fragment_profil"/>
