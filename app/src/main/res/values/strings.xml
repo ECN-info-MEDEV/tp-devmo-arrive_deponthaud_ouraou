@@ -15,4 +15,9 @@
     <string name="portablevalue">+33 6 12 34 56 78</string>
     <string name="bio">Biographie</string>
     <string name="biovalue">J\'aime aller au marché et faire des repas de famille.</string>
+    <string name="NomAmi">Nom</string>
+    <string name="boutton_suppression_amis">Supprimer l\'ami </string>
+    <string name="liste_amis">Liste de vos amis </string>
+    <string name="rechercher">Recherchez un ami </string>
+    <string name="filter_icon">Filtre des recherches</string>
 </resources>
