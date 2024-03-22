@@ -1,10 +1,16 @@
 package com.example.instagranny.ui.accueil
 
 import android.os.Bundle
+import android.text.Layout.Alignment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.instagranny.databinding.FragmentAccueilBinding
@@ -22,17 +28,12 @@ class AccueilFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val accueilViewModel =
-            ViewModelProvider(this).get(AccueilViewModel::class.java)
-
-        _binding = FragmentAccueilBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textAccueil
-        accueilViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        return ComposeView(requireContext()).apply {
+            setContent {
+                AccueilPage(modifier= Modifier.fillMaxSize()
+                    .padding(0.dp))
+            }
         }
-        return root
     }
 
     override fun onDestroyView() {
