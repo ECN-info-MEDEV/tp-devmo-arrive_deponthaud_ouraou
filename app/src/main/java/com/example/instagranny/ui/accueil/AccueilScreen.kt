@@ -127,7 +127,7 @@ fun AccueilPage(modifier : Modifier = Modifier) {
             color = Color.LightGray,
             thickness = 1.dp,
             modifier = modifier.padding(start = 80.dp, end=20.dp)
-        )   
+        )
         Row (modifier=modifier.padding(15.dp)){
             Box(modifier = modifier.align(Alignment.Top)
                 .padding(start = 10.dp, end=5.dp)
