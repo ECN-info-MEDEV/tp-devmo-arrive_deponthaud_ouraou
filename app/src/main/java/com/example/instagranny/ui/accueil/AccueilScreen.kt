@@ -1,6 +1,7 @@
 package com.example.instagranny.ui.accueil
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,6 +11,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,45 +20,59 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.instagranny.R
-import com.example.instagranny.ui.profil.ProfilPage
+import com.example.instagranny.ui.InstaViewModel
 
 
 @Composable
-fun AccueilPage(modifier : Modifier = Modifier) {
+fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
+    val instaUiState by instaViewModel.uiState.collectAsState()
     Column(modifier=Modifier
         .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
     ){
-        Image(
-            painter = painterResource(id = R.drawable.logo_instagram),
-            contentDescription = null,
-            modifier = Modifier
-                .width(220.dp)
-                .padding(15.dp)
-        )
+        Row{
+            Image(
+                painter = painterResource(id = R.drawable.logo_instagram),
+                contentDescription = null,
+                modifier = Modifier
+                    .width(150.dp)
+                    .padding(15.dp)
+                    .weight(0.7f)
+            )
+            Box (modifier = Modifier.padding(10.dp).weight(0.2f)){
+                RoundedImage(painterResource(instaUiState.adresseAvatar), 60.dp)
+            }
+        }
         Divider(color = Color.Gray, thickness = 1.dp)
-        Row (modifier=Modifier.fillMaxWidth(),
+        Row (modifier=Modifier.fillMaxWidth()
+            .horizontalScroll(rememberScrollState()),
             horizontalArrangement = Arrangement.Start)
         {
             val taille: Dp = 60.dp
             Box (modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp)) {
-                RoundedImage(painterResource(id = R.drawable.kin_personnes_agees), taille)
+                RoundedImage(painterResource(id = R.drawable.profil1), taille)
             }
             Box (modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp)) {
-                RoundedImage(painterResource(id = R.drawable.kin_personnes_agees), taille)
+                RoundedImage(painterResource(id = R.drawable.profil2), taille)
             }
             Box (modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp)) {
-                RoundedImage(painterResource(id = R.drawable.kin_personnes_agees), taille)
+                RoundedImage(painterResource(id = R.drawable.profil3), taille)
+            }
+            Box (modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp)) {
+                RoundedImage(painterResource(id = R.drawable.profil4), taille)
+            }
+            Box (modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp)) {
+                RoundedImage(painterResource(id = R.drawable.profil5), taille)
+            }
+            Box (modifier = Modifier.padding(start = 10.dp, top = 10.dp, bottom = 10.dp)) {
+                RoundedImage(painterResource(id = R.drawable.profil6), taille)
             }
 
         }
@@ -66,7 +83,7 @@ fun AccueilPage(modifier : Modifier = Modifier) {
                 .weight(0.2f)
             ){
                 val taille: Dp = 40.dp
-                RoundedImage(painterResource(id = R.drawable.kin_personnes_agees), taille)
+                RoundedImage(painterResource(id = R.drawable.profil3), taille)
             }
             Column(modifier=modifier.weight(1f)) {
                 Text("Camille dans Famille")
@@ -74,7 +91,7 @@ fun AccueilPage(modifier : Modifier = Modifier) {
                     fontStyle = FontStyle.Italic)
 
                 Image(
-                    painterResource(id = R.drawable.kin_personnes_agees),
+                    painterResource(id = R.drawable.publication1),
                     contentDescription = null,
                     modifier = Modifier.fillMaxWidth()
                         .clip(RoundedCornerShape(10))
@@ -92,7 +109,7 @@ fun AccueilPage(modifier : Modifier = Modifier) {
                 ){
                     Button(
                         onClick = {},
-                        modifier = modifier.weight(0.3f),
+                        modifier = modifier.weight(0.4f),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Unspecified, contentColor = Color.Black),
 
                     ) {
@@ -134,15 +151,15 @@ fun AccueilPage(modifier : Modifier = Modifier) {
                 .weight(0.2f)
             ){
                 val taille: Dp = 40.dp
-                RoundedImage(painterResource(id = R.drawable.kin_personnes_agees), taille)
+                RoundedImage(painterResource(id = R.drawable.profil4), taille)
             }
             Column(modifier=modifier.weight(1f)) {
-                Text("Camille dans Famille")
+                Text("Serge dans Famille")
                 Text(text="il y a 2 jours",
                     fontStyle = FontStyle.Italic)
 
                 Image(
-                    painterResource(id = R.drawable.kin_personnes_agees),
+                    painterResource(id = R.drawable.publication2),
                     contentDescription = null,
                     modifier = Modifier.fillMaxWidth()
                         .clip(RoundedCornerShape(10))
@@ -160,7 +177,7 @@ fun AccueilPage(modifier : Modifier = Modifier) {
                 ){
                     Button(
                         onClick = {},
-                        modifier = modifier.weight(0.3f),
+                        modifier = modifier.weight(0.4f),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Unspecified, contentColor = Color.Black),
 
                         ) {
@@ -201,7 +218,8 @@ fun AccueilPage(modifier : Modifier = Modifier) {
 fun ProfilPreview() {
     AccueilPage(
         modifier= Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
+        instaViewModel=viewModel()
     )
 }
 

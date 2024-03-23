@@ -7,34 +7,22 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.R
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
+import com.example.instagranny.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle.Companion.Italic
@@ -43,14 +31,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.dialog.Dialog
+import com.example.instagranny.ui.InstaUiState
+import com.example.instagranny.ui.InstaViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Preview
 @Composable
 fun ProfilPreview() {
-    val image = painterResource(id = com.example.instagranny.R.drawable.kin_personnes_agees)
+    val image = painterResource(id = R.drawable.kin_personnes_agees)
     ProfilPage(modifier = Modifier, // Modifier pour spécifier la taille de la page
-        image = painterResource(id = com.example.instagranny.R.drawable.kin_personnes_agees), // Image par défaut
+        instaViewModel= viewModel(),
         onImageClick = {
             // Action à effectuer lors du clic sur l'image
             // Par exemple, ouvrir la boîte de dialogue pour sélectionner une nouvelle image
@@ -59,9 +50,14 @@ fun ProfilPreview() {
 }
 
 @Composable
-fun ProfilPage(modifier : Modifier = Modifier,image: Painter, onImageClick: () -> Unit) {
-    val image2 = painterResource(id = com.example.instagranny.R.drawable.kin_personnes_agees)
-    var selectedImage by remember { mutableStateOf(image2) }
+fun ProfilPage(
+    modifier : Modifier = Modifier,
+    instaViewModel: InstaViewModel,
+    onImageClick: () -> Unit) {
+
+    val resources = LocalContext.current.resources
+    val instaUiState by instaViewModel.uiState.collectAsState()
+    var selectedImage = painterResource(instaUiState.adresseAvatar)
     var showImagePickerDialog by remember { mutableStateOf(false) }
 
 
@@ -204,21 +200,35 @@ fun ProfilPage(modifier : Modifier = Modifier,image: Painter, onImageClick: () -
     if (showImagePickerDialog) {
         ImagePickerDialog(
             onDismiss = { showImagePickerDialog = false },
+            instaViewModel=instaViewModel,
             onImageSelected = { image ->
                 selectedImage = image
                 showImagePickerDialog = false
-            }
+            },
         )
     }
     }
 
 @Composable
-fun ImagePickerDialog(onDismiss: () -> Unit, onImageSelected: (Painter) -> Unit) {
+fun ImagePickerDialog(onDismiss: () -> Unit, onImageSelected: (Painter) -> Unit,instaViewModel:InstaViewModel = viewModel()) {
     val images = listOf(
-        com.example.instagranny.R.drawable.kin_personnes_agees,
-        com.example.instagranny.R.drawable.tuto_photographier_un_coucher_de_soleil_plage
+        R.drawable.kin_personnes_agees,
+        R.drawable.tuto_photographier_un_coucher_de_soleil_plage,
+        R.drawable.profil1,
+        R.drawable.profil2,
+        R.drawable.profil3,
+        R.drawable.profil4,
+        R.drawable.profil5,
+        R.drawable.profil6,
         // Ajoutez ici d'autres références aux images disponibles dans le dossier drawable
     )
+    // Calcul du nombre de colonnes en fonction de la largeur de l'écran
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    val columnWidth = 100.dp // Largeur souhaitée de chaque image
+    val numColumns = (screenWidth / columnWidth).toInt()
+
+    // Division des images en lignes avec le nombre approprié de colonnes
+    val rows = images.chunked(numColumns)
 
     // Backdrop for the dialog
     Box(
@@ -241,17 +251,28 @@ fun ImagePickerDialog(onDismiss: () -> Unit, onImageSelected: (Painter) -> Unit)
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Affichage des images disponibles
-                images.forEach { image ->
-                    val painter = painterResource(id = image)
-                    Image(
-                        painter = painter,
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(100.dp)
-                            .padding(4.dp)
-                            .clickable { onImageSelected(painter) }
-                    )
+                // Affichage des lignes d'images
+                rows.forEach { rowImages ->
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        rowImages.forEach { image ->
+                            val painter = painterResource(id = image)
+                            Image(
+                                painter = painter,
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(100.dp)
+                                    .padding(4.dp)
+                                    .clickable {
+                                        onImageSelected(painter)
+                                        instaViewModel.newAvatar(image)
+                                    }
+                            )
+                        }
+                    }
                 }
             }
         }
