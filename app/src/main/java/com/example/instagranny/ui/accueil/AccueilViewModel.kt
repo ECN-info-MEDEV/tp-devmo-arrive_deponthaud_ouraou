@@ -11,7 +11,4 @@ class AccueilViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    Box{
-
-    }
 }
