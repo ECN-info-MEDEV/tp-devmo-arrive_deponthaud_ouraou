@@ -9,10 +9,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import com.example.instagranny.R
 import androidx.compose.ui.Alignment
@@ -27,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle.Companion.Italic
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,6 +37,9 @@ import androidx.wear.compose.material.dialog.Dialog
 import com.example.instagranny.ui.InstaUiState
 import com.example.instagranny.ui.InstaViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.instagranny.ui.accueil.RoundedImage
+import androidx.compose.runtime.*
+import androidx.compose.ui.text.input.TextFieldValue
 
 
 @Preview
@@ -59,9 +65,12 @@ fun ProfilPage(
     val instaUiState by instaViewModel.uiState.collectAsState()
     var selectedImage = painterResource(instaUiState.adresseAvatar)
     var showImagePickerDialog by remember { mutableStateOf(false) }
+    var isLoginFieldVisible by remember { mutableStateOf(false) }
+    val loginvalue =stringResource(R.string.loginvalue)
+    var LoginInput by remember { mutableStateOf(loginvalue) }
+    val textState = remember { mutableStateOf(TextFieldValue())}
 
-
-    Column(modifier=modifier,
+        Column(modifier=modifier,
         horizontalAlignment = Alignment.CenterHorizontally)
     {
         Column(
@@ -97,7 +106,7 @@ fun ProfilPage(
                 modifier = Modifier.width(16.dp)
             )
             Column(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(3f),
                 horizontalAlignment = Alignment.Start
             ) {
 
@@ -151,7 +160,7 @@ fun ProfilPage(
                     }
                 }
             Column( //COLUMN of values
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(3f),
                 horizontalAlignment = Alignment.Start
             ) {
                 //ligne NOM value
@@ -165,10 +174,24 @@ fun ProfilPage(
                 //ligneLOGIN value
                 Row(modifier = Modifier)
                 {
-                   Text(
-                            text = stringResource(com.example.instagranny.R.string.loginvalue),
-                        )
+                    if (isLoginFieldVisible) {
+                        TextField(
+                                value = LoginInput,
+                                onValueChange ={ newLoginValue:String -> LoginInput = newLoginValue},
+                                //value = textState.value,
+                                //onValueChange = { textState.value = it },
+                                //singleLine = true,
+                                modifier = Modifier,
+                                //KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
+
+                         )
                     }
+                    else{
+                   Text(
+                       //text = stringResource(com.example.instagranny.R.string.loginvalue),
+                       text=LoginInput
+                        )
+                    }}
                 Spacer(modifier = Modifier.height(15.dp))
                 //ligneMAIL value
                 Row(modifier = Modifier)
@@ -194,6 +217,32 @@ fun ProfilPage(
                         )
                     }
                 }
+            //COLUMN TO EDIT
+            Column(modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Spacer(modifier=Modifier.height(36.dp))
+                Row(modifier = Modifier)
+                {
+                    if (isLoginFieldVisible) {
+                        Image(
+                            painter = painterResource(R.drawable.ok),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(25.dp)
+                                .clickable { isLoginFieldVisible = false }
+                        )
+                    }
+                    else{
+                    Image(
+                        painter = painterResource(R.drawable.modify),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(20.dp)
+                            .clickable { isLoginFieldVisible = true }
+                    )}
+                }
+            }
             }
         }
     //Boîte de dialogue de sélection d'image
