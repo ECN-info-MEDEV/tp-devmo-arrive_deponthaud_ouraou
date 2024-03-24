@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -31,6 +33,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+
+
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.R
 import androidx.compose.runtime.getValue
@@ -43,14 +47,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.instagranny.ui.profil.ProfilPage
@@ -59,7 +66,7 @@ import com.example.instagranny.ui.profil.ProfilPage
 @Composable
 fun AmisPage(modifier:Modifier=Modifier){
     var searchQuery by remember { mutableStateOf("") }
-    Column(modifier=Modifier
+    Column(modifier= Modifier
         .statusBarsPadding()
         .padding(horizontal = 40.dp)
         .verticalScroll(rememberScrollState())
@@ -85,19 +92,32 @@ fun EnteteAmis(modifier:Modifier=Modifier,
         Text(
             text=stringResource(com.example.instagranny.R.string.liste_amis),
             textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold
         )
         Row(
             modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.End
         ) {
             SearchBar(
                 label=com.example.instagranny.R.string.rechercher,
-                leadingIcon = com.example.instagranny.R.drawable.imagefiltre,
+
                 value=searchQuery,
                 onValueChange=onSearchTextChanged,
-                modifier=Modifier.padding(bottom=32.dp).fillMaxWidth()
+                modifier= Modifier
+                    .weight(0.9f)
+                    //.padding(bottom = 32.dp)
+                    //.fillMaxWidth()
+            )
+            Spacer(
+                modifier = Modifier.requiredWidth(5.dp)
+            )
+            Icon(
+                painter = painterResource(id = com.example.instagranny.R.drawable.baseline_filter_alt_24),
+                contentDescription = stringResource(id = com.example.instagranny.R.string.filter_icon)
+
             )
 
         }
@@ -110,21 +130,21 @@ fun EnteteAmis(modifier:Modifier=Modifier,
         ){
             Text(
                 text=stringResource(id=com.example.instagranny.R.string.photos_amis),
-                fontWeight = FontWeight.Bold
+                fontStyle = FontStyle.Italic
             )
             Spacer(
                 modifier = Modifier.requiredWidth(15.dp)
             )
             Text(
                 text=stringResource(id=com.example.instagranny.R.string.nom_amis),
-                fontWeight = FontWeight.Bold
+                fontStyle = FontStyle.Italic
             )
             Spacer(
-                modifier = Modifier.requiredWidth(25.dp)
+                modifier = Modifier.requiredWidth(35.dp)
             )
             Text(
                 text=stringResource(id=com.example.instagranny.R.string.gerer_amitie),
-                fontWeight = FontWeight.Bold
+                fontStyle = FontStyle.Italic
             )
         }
         Divider(color = Color.Gray, thickness = 1.dp)
@@ -152,15 +172,16 @@ fun Ami(
         Button(
             onClick = {  },
             modifier = Modifier
-                .weight(0.5f) // Utiliser Modifier.weight pour répartir l'espace restant
+                .weight(0.9f) // Utiliser Modifier.weight pour répartir l'espace restant
                 .widthIn(min = 250.dp) // Largeur minimale pour le bouton
-                .padding(horizontal = 4.dp, vertical = 0.dp), // Ajouter un espacement intérieur au bouton
+                .padding(horizontal = 0.dp, vertical = 0.dp), // Ajouter un espacement intérieur au bouton
              // Modifier la couleur de fond du bouton
             shape = RoundedCornerShape(8.dp) // Définir la forme du bouton
         ) {
             Text(
                 text = stringResource(com.example.instagranny.R.string.boutton_suppression_amis),
-                fontSize = 10.sp // Modifier la taille et le style de la police
+                fontSize = 11.sp, // Modifier la taille et le style de la police
+                textAlign = TextAlign.Center,
             )
         }
     }
@@ -182,25 +203,41 @@ fun RoundedImage(image: Painter) {
     }
 }
 
+@Composable
+fun LoupeIcon(
+    modifier: Modifier = Modifier,
+    size: Dp,
+) {
+    Icon(
+        imageVector = Icons.Filled.Search,
+        contentDescription = "Search",
+        modifier = modifier.size(size),
+        tint = colorResource(com.example.instagranny.R.color.violet_dark)
+    )
+}
+
 
 @Composable
 fun SearchBar(
     @StringRes label:Int,
-    @DrawableRes leadingIcon:Int,
     value:String,
     onValueChange:(String)->Unit,
     modifier:Modifier=Modifier){
     TextField(
         value=value,
-        leadingIcon={Icon(painterResource(id=leadingIcon),null)},
+        leadingIcon={Icon(
+                    imageVector = Icons.Filled.Search,
+                    contentDescription = "Search",
+                    modifier = modifier.size(24.dp),
+                    tint = colorResource(com.example.instagranny.R.color.violet_dark))},
         onValueChange=onValueChange,
         modifier=modifier,
         label={Text(stringResource(label))},
-        singleLine=true,
+        singleLine=true
+
     )
-
-
 }
+
 @Preview
 @Composable
 fun AmisPreview() {
