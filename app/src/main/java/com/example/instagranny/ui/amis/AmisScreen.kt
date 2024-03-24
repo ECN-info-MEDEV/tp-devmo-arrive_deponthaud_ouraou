@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,6 +28,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -76,6 +78,9 @@ fun AmisPage(modifier:Modifier=Modifier){
             searchQuery= searchQuery,
             onSearchTextChanged ={searchQuery=it}
         )
+        Spacer(
+            modifier = Modifier.requiredWidth(5.dp)
+        )
         Ami(nomId=com.example.instagranny.R.string.NomAmi,image=com.example.instagranny.R.drawable.kin_personnes_agees)
     }
 
@@ -116,12 +121,15 @@ fun EnteteAmis(modifier:Modifier=Modifier,
             )
             Icon(
                 painter = painterResource(id = com.example.instagranny.R.drawable.baseline_filter_alt_24),
-                contentDescription = stringResource(id = com.example.instagranny.R.string.filter_icon)
+                contentDescription = stringResource(id = com.example.instagranny.R.string.filter_icon),
+                tint= colorResource(id=com.example.instagranny.R.color.pink_medium)
 
             )
 
         }
-
+        Spacer(
+            modifier = Modifier.requiredWidth(10.dp)
+        )
         Row(
             modifier = modifier
                 .fillMaxWidth()
@@ -174,9 +182,10 @@ fun Ami(
             modifier = Modifier
                 .weight(0.9f) // Utiliser Modifier.weight pour répartir l'espace restant
                 .widthIn(min = 250.dp) // Largeur minimale pour le bouton
-                .padding(horizontal = 0.dp, vertical = 0.dp), // Ajouter un espacement intérieur au bouton
-             // Modifier la couleur de fond du bouton
-            shape = RoundedCornerShape(8.dp) // Définir la forme du bouton
+                .padding(horizontal = 4.dp, vertical = 4.dp), // Ajouter un espacement intérieur au bouto
+                colors = ButtonDefaults.buttonColors(colorResource(id = com.example.instagranny.R.color.pink_light)), // Modifier la couleur de fond du bouton
+                contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp),// Modifier la couleur de fond du bouton
+                shape = RoundedCornerShape(8.dp) // Définir la forme du bouton
         ) {
             Text(
                 text = stringResource(com.example.instagranny.R.string.boutton_suppression_amis),
