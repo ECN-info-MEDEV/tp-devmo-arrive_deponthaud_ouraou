@@ -39,6 +39,7 @@ import androidx.compose.material3.TextField
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.R
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -62,16 +63,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.instagranny.data.Ami
+import com.example.instagranny.data.AmisListeState
+import com.example.instagranny.data.DataSource
 import com.example.instagranny.ui.profil.ProfilPage
 
 
 @Composable
-fun AmisPage(modifier:Modifier=Modifier){
+fun AmisPage(modifier:Modifier=Modifier,
+        viewModel: AmisListeViewModel = viewModel()
+){
     var searchQuery by remember { mutableStateOf("") }
+    val uiState by viewModel.uiState.collectAsState()
+    var amisInfos = DataSource.paramAmis
+    var listeAmis=uiState.listeAmis
     Column(modifier= Modifier
+        .verticalScroll(rememberScrollState())
         .statusBarsPadding()
         .padding(horizontal = 40.dp)
-        .verticalScroll(rememberScrollState())
     ){
         EnteteAmis(
             onFilterClicked={},
@@ -81,7 +91,18 @@ fun AmisPage(modifier:Modifier=Modifier){
         Spacer(
             modifier = Modifier.requiredWidth(5.dp)
         )
-        Ami(nomId=com.example.instagranny.R.string.NomAmi,image=com.example.instagranny.R.drawable.kin_personnes_agees)
+        val amis: List<Ami> = listeAmis.mapNotNull { amiId ->
+            amisInfos.find { it.component1() == amiId }?.let { amiInfo ->
+                Ami(amiId=amiInfo.component1(),nomId = amiInfo.component2(), imageId = amiInfo.component3())
+            }
+        }
+        amis.forEach { ami ->
+            AmiAffiche(
+                nomId = ami.nomId,
+                image = ami.imageId
+            )
+        }
+        AmiAffiche(nomId=com.example.instagranny.R.string.NomAmi,image=com.example.instagranny.R.drawable.kin_personnes_agees)
     }
 
 }
@@ -161,7 +182,7 @@ fun EnteteAmis(modifier:Modifier=Modifier,
 
 
 @Composable
-fun Ami(
+fun AmiAffiche(
     modifier: Modifier = Modifier,
     @StringRes nomId: Int,
     @DrawableRes image: Int
