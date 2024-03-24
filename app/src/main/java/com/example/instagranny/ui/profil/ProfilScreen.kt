@@ -68,7 +68,6 @@ fun ProfilPage(
     var isLoginFieldVisible by remember { mutableStateOf(false) }
     val loginvalue =stringResource(R.string.loginvalue)
     var LoginInput by remember { mutableStateOf(loginvalue) }
-    val textState = remember { mutableStateOf(TextFieldValue())}
 
         Column(modifier=modifier,
         horizontalAlignment = Alignment.CenterHorizontally)
