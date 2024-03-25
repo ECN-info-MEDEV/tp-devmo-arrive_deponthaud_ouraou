@@ -33,7 +33,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.wear.compose.material.dialog.Dialog
+//import androidx.wear.compose.material.dialog.Dialog
 import com.example.instagranny.ui.InstaUiState
 import com.example.instagranny.ui.InstaViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
