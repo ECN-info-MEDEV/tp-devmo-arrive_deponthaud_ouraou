@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -32,7 +33,9 @@ class AmisFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val context = requireContext()
         _binding = FragmentAmisBinding.inflate(inflater, container, false)
+
         val view = binding.root
         // Ne pas ajouter ComposeView à une vue existante, setContent remplace la vue existante par votre ComposeView
         val composeView = ComposeView(requireContext()).apply {
@@ -44,6 +47,7 @@ class AmisFragment : Fragment() {
                 AmisPage(modifier= Modifier.fillMaxSize()
                     .padding(0.dp),
                     instaViewModel=instaViewModel,
+                    context=context
                 )
             }
         }

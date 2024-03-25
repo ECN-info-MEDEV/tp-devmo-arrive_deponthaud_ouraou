@@ -1,5 +1,7 @@
 package com.example.instagranny.ui.amis
 
+import android.app.AlertDialog
+import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -63,6 +65,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.instagranny.data.Ami
 import com.example.instagranny.data.AmisListeState
@@ -74,7 +77,8 @@ import com.example.instagranny.ui.profil.ProfilPage
 @Composable
 fun AmisPage(modifier:Modifier=Modifier,
         viewModel: AmisListeViewModel = viewModel(),
-        instaViewModel: InstaViewModel
+        instaViewModel: InstaViewModel,
+             context:Context
 ){
     val instaUiState by instaViewModel.uiState.collectAsState()
     var searchQuery by remember { mutableStateOf("") }
@@ -123,7 +127,13 @@ fun AmisPage(modifier:Modifier=Modifier,
                 AmiAffiche(
                     nomId = ami.nomId,
                     image = ami.imageId,
-                    supprClique ={viewModel.enleverAmis(ami.amiId) }
+                    supprClique ={
+                        showConfirmationPopup(
+                            context = context,
+                            message = "Êtes-vous sûr de vouloir supprimer cet ami ?",
+                            onConfirmed = { viewModel.enleverAmis(ami.amiId) }
+                        )
+                    }
                 )
             }
 
@@ -200,6 +210,31 @@ fun EnteteAmis(modifier:Modifier=Modifier,
         }
     }
 
+fun showConfirmationPopup(context: Context, message: String, onConfirmed: () -> Unit) {
+    val alertDialogBuilder = AlertDialog.Builder(context)
+
+    // Titre de la fenêtre pop-up de confirmation (facultatif)
+    alertDialogBuilder.setTitle("Confirmation")
+
+    // Message de la fenêtre pop-up de confirmation
+    alertDialogBuilder.setMessage(message)
+
+    // Bouton de confirmation
+    alertDialogBuilder.setPositiveButton("Confirmer") { dialog, which ->
+        // Appel de la fonction onConfirmed lorsque l'utilisateur confirme
+        onConfirmed.invoke()
+        dialog.dismiss() // Fermer la fenêtre pop-up
+    }
+
+    // Bouton d'annulation
+    alertDialogBuilder.setNegativeButton("Annuler") { dialog, which ->
+        dialog.dismiss() // Fermer la fenêtre pop-up
+    }
+
+    // Créer et afficher la fenêtre pop-up de confirmation
+    val alertDialog = alertDialogBuilder.create()
+    alertDialog.show()
+}
 
 @Composable
 fun AmiAffiche(
@@ -288,16 +323,18 @@ fun SearchBar(
 
     )
 }
-
+/*
 @Preview
 @Composable
+
 fun AmisPreview() {
     AmisPage(
         modifier= Modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center),
-        instaViewModel=InstaViewModel()
+        instaViewModel=InstaViewModel(),
+        context = requireContext()
     )
-}
+}*/
 
 
