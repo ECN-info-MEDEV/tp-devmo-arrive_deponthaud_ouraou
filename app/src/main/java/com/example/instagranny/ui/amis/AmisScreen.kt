@@ -82,7 +82,7 @@ fun AmisPage(modifier:Modifier=Modifier,
     var amisInfos = DataSource.paramAmis
     var listeAmis=uiState.listeAmis
     Column (modifier=Modifier
-        .verticalScroll(rememberScrollState()),
+        .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
         ){
@@ -100,9 +100,11 @@ fun AmisPage(modifier:Modifier=Modifier,
             }
         }
         Divider(color = Color.Gray, thickness = 1.dp)
+
         Column(
             modifier = Modifier
                 .statusBarsPadding()
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 40.dp)
         ) {
             EnteteAmis(
@@ -129,6 +131,7 @@ fun AmisPage(modifier:Modifier=Modifier,
                 image = com.example.instagranny.R.drawable.kin_personnes_agees
             )
         }
+
     }
 
 }
