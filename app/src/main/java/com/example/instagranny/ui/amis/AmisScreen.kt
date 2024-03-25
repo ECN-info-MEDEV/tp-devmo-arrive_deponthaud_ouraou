@@ -81,6 +81,7 @@ fun AmisPage(modifier:Modifier=Modifier,
     val uiState by viewModel.uiState.collectAsState()
     var amisInfos = DataSource.paramAmis
     var listeAmis=uiState.listeAmis
+
     Column (modifier=Modifier
         .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -121,13 +122,11 @@ fun AmisPage(modifier:Modifier=Modifier,
             amis.forEach { ami ->
                 AmiAffiche(
                     nomId = ami.nomId,
-                    image = ami.imageId
+                    image = ami.imageId,
+                    supprClique ={viewModel.enleverAmis(ami.amiId) }
                 )
             }
-            AmiAffiche(
-                nomId = com.example.instagranny.R.string.NomAmi,
-                image = com.example.instagranny.R.drawable.kin_personnes_agees
-            )
+
         }
     }
 
@@ -206,7 +205,8 @@ fun EnteteAmis(modifier:Modifier=Modifier,
 fun AmiAffiche(
     modifier: Modifier = Modifier,
     @StringRes nomId: Int,
-    @DrawableRes image: Int
+    @DrawableRes image: Int,
+    supprClique: () -> Unit,
 ) {
     Row(
         modifier = modifier.padding(8.dp),
@@ -220,7 +220,7 @@ fun AmiAffiche(
         )
         Spacer(modifier = Modifier.width(8.dp))
         Button(
-            onClick = {  },
+            onClick = supprClique,
             modifier = Modifier
                 .weight(0.9f) // Utiliser Modifier.weight pour répartir l'espace restant
                 .widthIn(min = 250.dp) // Largeur minimale pour le bouton
