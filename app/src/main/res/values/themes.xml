@@ -3,7 +3,7 @@
     <style name="Theme.InstaGranny" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/insta1</item>
-        <item name="colorPrimaryVariant">@color/insta2</item>
+        <item name="colorPrimaryVariant">@color/insta1</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/pink_dark</item>
