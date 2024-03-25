@@ -234,7 +234,7 @@ fun ProfilPage(
                     }
                     else{
                     Image(
-                        painter = painterResource(R.drawable.modify),
+                        painter = painterResource(R.drawable.edit),
                         contentDescription = null,
                         modifier = Modifier
                             .size(20.dp)
