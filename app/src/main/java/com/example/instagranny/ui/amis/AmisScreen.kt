@@ -67,42 +67,68 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.instagranny.data.Ami
 import com.example.instagranny.data.AmisListeState
 import com.example.instagranny.data.DataSource
+import com.example.instagranny.ui.InstaViewModel
 import com.example.instagranny.ui.profil.ProfilPage
 
 
 @Composable
 fun AmisPage(modifier:Modifier=Modifier,
-        viewModel: AmisListeViewModel = viewModel()
+        viewModel: AmisListeViewModel = viewModel(),
+        instaViewModel: InstaViewModel
 ){
+    val instaUiState by instaViewModel.uiState.collectAsState()
     var searchQuery by remember { mutableStateOf("") }
     val uiState by viewModel.uiState.collectAsState()
     var amisInfos = DataSource.paramAmis
     var listeAmis=uiState.listeAmis
-    Column(modifier= Modifier
-        .verticalScroll(rememberScrollState())
-        .statusBarsPadding()
-        .padding(horizontal = 40.dp)
-    ){
-        EnteteAmis(
-            onFilterClicked={},
-            searchQuery= searchQuery,
-            onSearchTextChanged ={searchQuery=it}
-        )
-        Spacer(
-            modifier = Modifier.requiredWidth(5.dp)
-        )
-        val amis: List<Ami> = listeAmis.mapNotNull { amiId ->
-            amisInfos.find { it.component1() == amiId }?.let { amiInfo ->
-                Ami(amiId=amiInfo.component1(),nomId = amiInfo.component2(), imageId = amiInfo.component3())
+    Column (modifier=Modifier
+        .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top,
+        ){
+        Row {
+            Image(
+                painter = painterResource(id = com.example.instagranny.R.drawable.logo_instagram),
+                contentDescription = null,
+                modifier = Modifier
+                    .width(150.dp)
+                    .padding(15.dp)
+                    .weight(0.7f)
+            )
+            Box(modifier = Modifier.padding(10.dp).weight(0.2f)) {
+                com.example.instagranny.ui.accueil.RoundedImage(painterResource(instaUiState.adresseAvatar), 60.dp)
             }
         }
-        amis.forEach { ami ->
+        Divider(color = Color.Gray, thickness = 1.dp)
+        Column(
+            modifier = Modifier
+                .statusBarsPadding()
+                .padding(horizontal = 40.dp)
+        ) {
+            EnteteAmis(
+                onFilterClicked = {},
+                searchQuery = searchQuery,
+                onSearchTextChanged = { searchQuery = it }
+            )
+            Spacer(
+                modifier = Modifier.requiredWidth(5.dp)
+            )
+            val amis: List<Ami> = listeAmis.mapNotNull { amiId ->
+                amisInfos.find { it.component1() == amiId }?.let { amiInfo ->
+                    Ami(amiId = amiInfo.component1(), nomId = amiInfo.component2(), imageId = amiInfo.component3())
+                }
+            }
+            amis.forEach { ami ->
+                AmiAffiche(
+                    nomId = ami.nomId,
+                    image = ami.imageId
+                )
+            }
             AmiAffiche(
-                nomId = ami.nomId,
-                image = ami.imageId
+                nomId = com.example.instagranny.R.string.NomAmi,
+                image = com.example.instagranny.R.drawable.kin_personnes_agees
             )
         }
-        AmiAffiche(nomId=com.example.instagranny.R.string.NomAmi,image=com.example.instagranny.R.drawable.kin_personnes_agees)
     }
 
 }
@@ -115,11 +141,6 @@ fun EnteteAmis(modifier:Modifier=Modifier,
 
     Column(modifier,
         horizontalAlignment = Alignment.CenterHorizontally){
-        Text(
-            text=stringResource(com.example.instagranny.R.string.liste_amis),
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold
-        )
         Row(
             modifier = modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -143,7 +164,7 @@ fun EnteteAmis(modifier:Modifier=Modifier,
             Icon(
                 painter = painterResource(id = com.example.instagranny.R.drawable.baseline_filter_alt_24),
                 contentDescription = stringResource(id = com.example.instagranny.R.string.filter_icon),
-                tint= colorResource(id=com.example.instagranny.R.color.pink_medium)
+                tint= colorResource(id=com.example.instagranny.R.color.insta2)
 
             )
 
@@ -204,7 +225,7 @@ fun AmiAffiche(
                 .weight(0.9f) // Utiliser Modifier.weight pour répartir l'espace restant
                 .widthIn(min = 250.dp) // Largeur minimale pour le bouton
                 .padding(horizontal = 4.dp, vertical = 4.dp), // Ajouter un espacement intérieur au bouto
-                colors = ButtonDefaults.buttonColors(colorResource(id = com.example.instagranny.R.color.pink_light)), // Modifier la couleur de fond du bouton
+                colors = ButtonDefaults.buttonColors(colorResource(id = com.example.instagranny.R.color.instaButton)), // Modifier la couleur de fond du bouton
                 contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp),// Modifier la couleur de fond du bouton
                 shape = RoundedCornerShape(8.dp) // Définir la forme du bouton
         ) {
@@ -274,7 +295,8 @@ fun AmisPreview() {
     AmisPage(
         modifier= Modifier
             .fillMaxSize()
-            .wrapContentSize(Alignment.Center)
+            .wrapContentSize(Alignment.Center),
+        instaViewModel=InstaViewModel()
     )
 }
 

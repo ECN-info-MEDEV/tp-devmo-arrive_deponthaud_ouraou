@@ -13,4 +13,7 @@
     <color name="violet_light">#FFD6A3FF</color>
     <color name="violet_medium">#FFA74DFF</color>
     <color name="violet_dark">#FF6F2DBD</color>
+    <color name="insta1">#CE082BCB</color>
+    <color name="insta2">#51277C</color>
+    <color name="instaButton">#FF0084FA</color>
 </resources>
