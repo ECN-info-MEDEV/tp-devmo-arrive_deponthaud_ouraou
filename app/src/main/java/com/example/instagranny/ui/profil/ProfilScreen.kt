@@ -66,7 +66,7 @@ fun ProfilPage(
     var selectedImage = painterResource(instaUiState.adresseAvatar)
     var showImagePickerDialog by remember { mutableStateOf(false) }
     var isLoginFieldVisible by remember { mutableStateOf(false) }
-    val loginvalue =stringResource(R.string.loginvalue)
+    val loginvalue = instaUiState.profilNom
     var LoginInput by remember { mutableStateOf(loginvalue) }
 
         Column(modifier=modifier,
@@ -180,10 +180,11 @@ fun ProfilPage(
                                 //value = textState.value,
                                 //onValueChange = { textState.value = it },
                                 //singleLine = true,
-                                modifier = Modifier,
+                                modifier = Modifier
                                 //KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
 
                          )
+                        instaViewModel.newProfilName(LoginInput)
                     }
                     else{
                    Text(
