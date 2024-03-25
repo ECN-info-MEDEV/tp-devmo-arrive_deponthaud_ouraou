@@ -97,7 +97,7 @@ fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
                         .clip(RoundedCornerShape(10))
                         .padding(top=5.dp, bottom=5.dp)
                 )
-                Text("Jacqueline a commenté :")
+                Text(instaUiState.profilNom +" a commenté :")
                 Box(modifier=modifier.padding(start=15.dp)
                 ){
                     Text("Beurk...")
@@ -165,7 +165,7 @@ fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
                         .clip(RoundedCornerShape(10))
                         .padding(top=5.dp, bottom=5.dp)
                 )
-                Text("Jacqueline a commenté :")
+                Text(instaUiState.profilNom +" a commenté :")
                 Box(modifier=modifier.padding(start=15.dp)
                 ){
                     Text("Beurk...")

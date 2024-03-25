@@ -15,4 +15,18 @@
     <string name="portablevalue">+33 6 12 34 56 78</string>
     <string name="bio">Biographie</string>
     <string name="biovalue">J\'aime aller au marché et faire des repas de famille.</string>
+    <string name="NomAmi">Nom</string>
+    <string name="boutton_suppression_amis">Supprimer l\'ami </string>
+    <string name="liste_amis">Liste de vos amis </string>
+    <string name="rechercher">Recherchez un ami </string>
+    <string name="filter_icon">Filtre des recherches</string>
+    <string name="photos_amis">Photos</string>
+    <string name="nom_amis">Nom de l\'ami</string>
+    <string name="gerer_amitie">Gérer l\'amiti\é</string>
+    <string name="profil1">Elsa Arriv\é</string>
+    <string name="profil2">C\éline Ouraou</string>
+    <string name="profil3">Vianney De Ponthaud</string>
+    <string name="profil4">Patrick S\ébastien</string>
+    <string name="profil5">Jean Leclerc</string>
+
 </resources>
