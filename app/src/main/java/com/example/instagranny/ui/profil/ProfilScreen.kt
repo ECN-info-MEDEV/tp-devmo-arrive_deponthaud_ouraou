@@ -40,6 +40,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.instagranny.ui.accueil.RoundedImage
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.sp
 
 
 @Preview
@@ -76,11 +77,13 @@ fun ProfilPage(
             modifier = modifier,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
+            Spacer(modifier = Modifier.height(34.dp)
+            )
             Text(
                 text = stringResource(com.example.instagranny.R.string.votre_profil),
                 textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                fontSize=30.sp
             )
             Spacer(
                 modifier = Modifier.height(34.dp)
@@ -225,11 +228,19 @@ fun ProfilPage(
                 Row(modifier = Modifier)
                 {
                     if (isLoginFieldVisible) {
-                        Image(
+                        /*Image(
                             painter = painterResource(R.drawable.ok),
                             contentDescription = null,
                             modifier = Modifier
                                 .size(25.dp)
+                                .clickable { isLoginFieldVisible = false }
+                        )*/
+                        Text(
+                            text="OK",
+                            color = Color.Blue,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .size(30.dp)
                                 .clickable { isLoginFieldVisible = false }
                         )
                     }
