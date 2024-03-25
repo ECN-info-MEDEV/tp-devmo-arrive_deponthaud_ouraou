@@ -3,7 +3,7 @@
     <string name="title_accueil">Accueil</string>
     <string name="title_amis">Amis</string>
     <string name="title_profil">Profil</string>
-    <string name="votre_profil">Votre Profil</string>
+    <string name="votre_profil">Bonjour, Monique !</string>
     <string name="photo_profil">Modifiez votre photo de profil</string>
     <string name="nom">Nom</string>
     <string name="nomvalue">Monique Bastide</string>
