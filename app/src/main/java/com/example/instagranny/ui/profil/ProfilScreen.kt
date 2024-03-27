@@ -80,7 +80,7 @@ fun ProfilPage(
             Spacer(modifier = Modifier.height(34.dp)
             )
             Text(
-                text = stringResource(com.example.instagranny.R.string.votre_profil),
+                text = stringResource(R.string.bonjour) +instaUiState.profilNom,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 fontSize=30.sp

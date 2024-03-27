@@ -28,6 +28,15 @@
     <string name="profil3">Vianney De Ponthaud</string>
     <string name="profil4">Patrick S\ébastien</string>
     <string name="profil5">Jean Leclerc</string>
+    <string name="comment2">Les Hospices de Beaune... Magnifique !</string>
+    <string name="a_comment">" a commenté :"</string>
+    <string name="serge_dans_famille">Serge dans Famille</string>
+    <string name="il_y_a_2_jours">il y a 2 jours</string>
+    <string name="aimer">Aimer</string>
+    <string name="commenter">Commenter</string>
+    <string name="comment1">C\'est très beau ! Où étais-tu ?</string>
+    <string name="camille_dans_famille">Camille dans Famille</string>
+    <string name="bonjour">"Bonjour "</string>
     <string name="confirmation">Confirmation</string>
     <string name="confirmer">Confirmer</string>
     <string name="annuler">Annuler</string>

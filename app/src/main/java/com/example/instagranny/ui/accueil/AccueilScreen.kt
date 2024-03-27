@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -86,8 +87,8 @@ fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
                 RoundedImage(painterResource(id = R.drawable.profil3), taille)
             }
             Column(modifier=modifier.weight(1f)) {
-                Text("Camille dans Famille")
-                Text(text="il y a 2 jours",
+                Text(stringResource(R.string.camille_dans_famille))
+                Text(text=stringResource(R.string.il_y_a_2_jours),
                     fontStyle = FontStyle.Italic)
 
                 Image(
@@ -97,10 +98,10 @@ fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
                         .clip(RoundedCornerShape(10))
                         .padding(top=5.dp, bottom=5.dp)
                 )
-                Text(instaUiState.profilNom +" a commenté :")
+                Text(instaUiState.profilNom + stringResource(R.string.a_comment))
                 Box(modifier=modifier.padding(start=15.dp)
                 ){
-                    Text("Beurk...")
+                    Text(stringResource(R.string.comment1))
                 }
                 Spacer(
                     modifier=Modifier.width(8.dp)
@@ -118,7 +119,7 @@ fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
                             contentDescription = null,
                             modifier = Modifier.size(20.dp)
                         )
-                        Text("Aimer", modifier=modifier.padding(start=4.dp))
+                        Text(stringResource(R.string.aimer), modifier=modifier.padding(start=4.dp))
                     }
                     Button(
                         onClick = {},
@@ -131,14 +132,10 @@ fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
                             contentDescription = null,
                             modifier = Modifier.size(20.dp)
                         )
-                        Text("Commenter", modifier=modifier.padding(start=6.dp,top=3.dp))
+                        Text(stringResource(R.string.commenter), modifier=modifier.padding(start=6.dp,top=3.dp))
                     }
-
                 }
-
-
             }
-
         }
         Divider(
             color = Color.LightGray,
@@ -154,8 +151,8 @@ fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
                 RoundedImage(painterResource(id = R.drawable.profil4), taille)
             }
             Column(modifier=modifier.weight(1f)) {
-                Text("Serge dans Famille")
-                Text(text="il y a 2 jours",
+                Text(stringResource(R.string.serge_dans_famille))
+                Text(text= stringResource(R.string.il_y_a_2_jours),
                     fontStyle = FontStyle.Italic)
 
                 Image(
@@ -165,10 +162,10 @@ fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
                         .clip(RoundedCornerShape(10))
                         .padding(top=5.dp, bottom=5.dp)
                 )
-                Text(instaUiState.profilNom +" a commenté :")
+                Text(instaUiState.profilNom +stringResource(R.string.a_comment))
                 Box(modifier=modifier.padding(start=15.dp)
                 ){
-                    Text("Beurk...")
+                    Text(stringResource(R.string.comment2))
                 }
                 Spacer(
                     modifier=Modifier.width(8.dp)
@@ -186,7 +183,7 @@ fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
                             contentDescription = null,
                             modifier = Modifier.size(20.dp)
                         )
-                        Text("Aimer", modifier=modifier.padding(start=4.dp))
+                        Text(stringResource(R.string.aimer), modifier=modifier.padding(start=4.dp))
                     }
                     Button(
                         onClick = {},
@@ -199,16 +196,19 @@ fun AccueilPage(modifier : Modifier = Modifier, instaViewModel:InstaViewModel) {
                             contentDescription = null,
                             modifier = Modifier.size(20.dp)
                         )
-                        Text("Commenter", modifier=modifier.padding(start=6.dp,top=3.dp))
+                        Text(stringResource(R.string.commenter), modifier=modifier.padding(start=6.dp,top=3.dp))
                     }
-
                 }
-
-
             }
-
         }
-
+        Divider(
+            color = Color.LightGray,
+            thickness = 1.dp,
+            modifier = modifier.padding(start = 80.dp, end=20.dp)
+        )
+        Box(modifier=modifier.padding(15.dp)) {
+            Text("")
+        }
     }
 
 }
