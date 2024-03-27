@@ -8,5 +8,9 @@ Nous nous sommes mis d'accord sur les pages à réaliser :
 
 Les passages de données seront les suivants :
  - transmission de la photo de profil pour la faire apparaitre sur les autres pages
- - transmission du nom pour le mettre à jour sur la page d'accueil
+ - transmission du nom pour le mettre à jour sur la page d'accueil (dans les commentaires)
+
+En bonus : 
+ - fonctionnalité de suppression des amis (avec pop-up de confirmation)
+ - une superbe icône d'application
 
