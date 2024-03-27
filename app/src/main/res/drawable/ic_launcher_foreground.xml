@@ -5,7 +5,6 @@
         android:viewportWidth="108"
         android:viewportHeight="108">
 
-    <!-- Forme de l'appareil photo -->
     <path android:pathData="M70,28h-32c-4.4,0 -8,3.6 -8,8v36c0,4.4 3.6,8 8,8h32c4.4,0 8,-3.6 8,-8V36c0,-4.4 -3.6,-8 -8,-8z">
         <aapt:attr name="android:fillColor">
             <gradient
@@ -15,16 +14,16 @@
                     android:endX="70"
                     android:type="linear">
                 <item
-                        android:color="#F58529"
+                        android:color="#FBB03F"
                         android:offset="0.0"/>
                 <item
-                        android:color="#DD2A7B"
+                        android:color="#CA28E7"
                         android:offset="1.0"/>
             </gradient>
         </aapt:attr>
     </path>
 
-    <path android:pathData="M70,28h-32c-4.4,0 -8,3.6 -8,8v36c0,4.4 3.6,8 8,8h32c4.4,0 8,-3.6 8,-8V36c0,-4.4 -3.6,-8 -8,-8z">
+    <path android:pathData="M54,40h-3v28h6V40z">
         <aapt:attr name="android:fillColor">
             <gradient
                     android:startY="28"
@@ -33,10 +32,10 @@
                     android:endX="70"
                     android:type="linear">
                 <item
-                        android:color="#F58529"
+                        android:color="#FFEB3B"
                         android:offset="0.0"/>
                 <item
-                        android:color="#DD2A7B"
+                        android:color="#FFEB3B"
                         android:offset="1.0"/>
             </gradient>
         </aapt:attr>
