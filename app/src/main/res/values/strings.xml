@@ -36,5 +36,6 @@
     <string name="commenter">Commenter</string>
     <string name="comment1">C\'est très beau ! Où étais-tu ?</string>
     <string name="camille_dans_famille">Camille dans Famille</string>
+    <string name="bonjour">"Bonjour "</string>
 
 </resources>
