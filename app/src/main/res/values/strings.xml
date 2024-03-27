@@ -28,5 +28,9 @@
     <string name="profil3">Vianney De Ponthaud</string>
     <string name="profil4">Patrick S\ébastien</string>
     <string name="profil5">Jean Leclerc</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="confirmer">Confirmer</string>
+    <string name="annuler">Annuler</string>
+    <string name="question_suppression_ami">Êtes-vous sûr de vouloir supprimer cet ami ?</string>
 
 </resources>

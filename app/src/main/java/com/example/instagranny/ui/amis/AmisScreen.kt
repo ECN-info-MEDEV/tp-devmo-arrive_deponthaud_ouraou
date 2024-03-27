@@ -85,7 +85,7 @@ fun AmisPage(modifier:Modifier=Modifier,
     val uiState by viewModel.uiState.collectAsState()
     var amisInfos = DataSource.paramAmis
     var listeAmis=uiState.listeAmis
-
+    val messageSuppr = stringResource(id=com.example.instagranny.R.string.question_suppression_ami)
     Column (modifier=Modifier
         .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -132,7 +132,7 @@ fun AmisPage(modifier:Modifier=Modifier,
                     supprClique ={
                         showConfirmationPopup(
                             context = context,
-                            message = "Êtes-vous sûr de vouloir supprimer cet ami ?",
+                            message = messageSuppr,
                             onConfirmed = { viewModel.enleverAmis(ami.amiId) }
                         )
                     }
@@ -217,20 +217,20 @@ fun showConfirmationPopup(context: Context, message: String, onConfirmed: () -> 
     val alertDialogBuilder = AlertDialog.Builder(context)
 
     // Titre de la fenêtre pop-up de confirmation (facultatif)
-    alertDialogBuilder.setTitle("Confirmation")
+    alertDialogBuilder.setTitle(com.example.instagranny.R.string.confirmation)
 
     // Message de la fenêtre pop-up de confirmation
     alertDialogBuilder.setMessage(message)
 
     // Bouton de confirmation
-    alertDialogBuilder.setPositiveButton("Confirmer") { dialog, which ->
+    alertDialogBuilder.setPositiveButton(com.example.instagranny.R.string.confirmer) { dialog, which ->
         // Appel de la fonction onConfirmed lorsque l'utilisateur confirme
         onConfirmed.invoke()
         dialog.dismiss() // Fermer la fenêtre pop-up
     }
 
     // Bouton d'annulation
-    alertDialogBuilder.setNegativeButton("Annuler") { dialog, which ->
+    alertDialogBuilder.setNegativeButton(com.example.instagranny.R.string.annuler) { dialog, which ->
         dialog.dismiss() // Fermer la fenêtre pop-up
     }
 
